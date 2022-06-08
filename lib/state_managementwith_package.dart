@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'ephemeral_vs_appState.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,6 +12,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        '/ephemeralvsappstate': (context) => MyEphemeral(),
+      },
       debugShowCheckedModeBanner: false,
       home: ChangeNotifierProvider(
         create: (context) => ValueNotifier('New written text'),
@@ -29,8 +33,19 @@ class MainPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('State management'),
       ),
-      body: Center(
-        child: FirstWidget(),
+      body: Column(
+        children: [
+         const Center(
+            child: FirstWidget(),
+          ),
+          Center(
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/ephemeralvsappstate');
+                },
+                icon: Icon(Icons.queue_play_next)),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
